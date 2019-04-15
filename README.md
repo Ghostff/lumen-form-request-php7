@@ -1,16 +1,14 @@
-<a href="https://packagist.org/packages/pearl/lumen-request-validate"><img src="https://poser.pugx.org/pearl/lumen-request-validate/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/pearl/lumen-request-validate"><img src="https://poser.pugx.org/pearl/lumen-request-validate/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/pearl/lumen-request-validate"><img src="https://poser.pugx.org/pearl/lumen-request-validate/license.svg" alt="License"></a>
-
+**This is a PHP 7+ version from an initial fork of https://github.com/pearlkrishn/lumen-request-validate**
+----
 Lumen doesn't have form request validator seperatly. This package helps developers to segregate the validation layer from the controller to a separate dedicated class.
 
 ## Installation
 
-   `composer require pearl/lumen-request-validate`
+   `composer require ghostff/lumen-formrequest`
 
 - Add the service provider in bootstrap/app.php
 
-`$app->register(Pearl\RequestValidate\RequestServiceProvider::class);`
+`$app->register(Ghostff\FormRequest\RequestServiceProvider::class);`
 
 Next step is create your validator class using below console comment
 
@@ -23,18 +21,21 @@ Next step is create your validator class using below console comment
  Login validation class
  ```php
 <?php
+
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
-use Pearl\RequestValidate\RequestAbstract;
+use Ghostff\FormRequest\AbstractFormRequest;
 
-class Login extends RequestAbstract
+class Login extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -44,11 +45,11 @@ class Login extends RequestAbstract
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-			"username" => "required",
-			"password" => "required"
+            "username" => "required",
+            "password" => "required"
         ];
     }
 
@@ -57,7 +58,7 @@ class Login extends RequestAbstract
      *
      * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [];
     }
@@ -76,7 +77,8 @@ class ExampleController extends Controller
 {
     public function auth(Login $request)
     {
-	//Login logic goes here
+        $validated = $request->validated();
+	    //Login logic goes here
     }
 ...
 ```

@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DummyNamespace;
 
-use Pearl\RequestValidate\RequestAbstract;
+use Ghostff\FormRequest\AbstractFormRequest;
 
-class DummyClass extends RequestAbstract
+/**
+ * @method array validated()
+ */
+class DummyClass extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +26,7 @@ class DummyClass extends RequestAbstract
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             //
@@ -33,7 +38,7 @@ class DummyClass extends RequestAbstract
      *
      * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             //

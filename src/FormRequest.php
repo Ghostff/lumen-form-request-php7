@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidatesWhenResolvedTrait;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-abstract class RequestAbstract extends Request implements ValidatesWhenResolved
+abstract class FormRequest extends Request implements ValidatesWhenResolved
 {
     use ValidatesWhenResolvedTrait;
 
@@ -30,12 +30,23 @@ abstract class RequestAbstract extends Request implements ValidatesWhenResolved
     protected $errorBag = 'default';
 
     /**
+     * The validator instance.
+     *
+     * @var \Illuminate\Contracts\Validation\Validator
+     */
+    protected $validator;
+
+    /**
      * Get the validator instance for the request.
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function getValidatorInstance()
     {
+        if ($this->validator) {
+            return $this->validator;
+        }
+
         $factory = $this->container->make(ValidationFactory::class);
 
         if (method_exists($this, 'validator')) {
@@ -48,7 +59,19 @@ abstract class RequestAbstract extends Request implements ValidatesWhenResolved
             $this->withValidator($validator);
         }
 
+        $this->validator = $validator;
+
         return $validator;
+    }
+
+    /**
+     * Get the validated data from the request.
+     *
+     * @return array
+     */
+    public function validated()
+    {
+        return $this->validator->validated();
     }
 
     /**

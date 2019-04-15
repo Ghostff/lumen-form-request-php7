@@ -1,6 +1,8 @@
 <?php
 
-namespace Pearl\RequestValidate\Console;
+declare(strict_types=1);
+
+namespace Ghostff\FormRequest\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
@@ -32,7 +34,7 @@ class RequestMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
         return __DIR__ . '/stubs/request.stub';
     }
@@ -43,7 +45,7 @@ class RequestMakeCommand extends GeneratorCommand
      * @param  string  $rootNamespace
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace(string $rootNamespace): string
     {
         return $rootNamespace . '\Http\Requests';
     }

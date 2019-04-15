@@ -1,18 +1,19 @@
 <?php
 
-namespace Pearl\RequestValidate;
+declare(strict_types=1);
+
+namespace Ghostff\FormRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application;
 
 class RequestServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        $this->commands([
-            \Pearl\RequestValidate\Console\RequestMakeCommand::class
-        ]);
+        $this->commands([\Ghostff\FormRequest\Console\RequestMakeCommand::class]);
     }
 
     /**
@@ -22,11 +23,11 @@ class RequestServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->resolving(RequestAbstract::class, function ($request, $app) {
+        $this->app->resolving(AbstractFormRequest::class, function (Request $request, Application $app) {
             $this->initializeRequest($request, $app['request']);
         });
-        
-        $this->app->afterResolving(RequestAbstract::class, function ($resolved) {
+
+        $this->app->afterResolving(AbstractFormRequest::class, function (AbstractFormRequest $resolved) {
             $resolved->validateResolved();
         });
 
@@ -35,11 +36,11 @@ class RequestServiceProvider extends ServiceProvider
     /**
      * Initialize the form request with data from the given request.
      *
-     * @param  \Pearl\RequestValidate\RequestAbstract  $form
+     * @param  \Pearl\RequestValidate\AbstractFormRequest  $form
      * @param  \Illuminate\Http\Request  $current
      * @return void
      */
-    protected function initializeRequest(RequestAbstract $form, Request $current)
+    protected function initializeRequest(AbstractFormRequest $form, Request $current)
     {
         $files = $current->files->all();
 
