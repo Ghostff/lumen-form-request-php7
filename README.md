@@ -70,7 +70,6 @@ class Login extends AbstractFormRequest
  ## How to use?
  Now you can use your Request class in method injections
 ```php
-...
 use App\Http\Requests\Login;
 
 class ExampleController extends Controller
