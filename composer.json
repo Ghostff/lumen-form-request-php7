@@ -1,5 +1,5 @@
 {
-    "name": "ghostff/lumen-form-request",
+    "name": "ghostff/lumen-form-request-with-validated",
     "description": "Lumen doesn't have separate form request validator. This is a PHP 7+ version from an initial fork of https://github.com/pearlkrishn/lumen-request-validate",
     "type": "library",
     "keywords": ["lumen", "lumen-request-validate", "form-request", "validation", "lumen-package", "form-validation", "form-request-validation"],
