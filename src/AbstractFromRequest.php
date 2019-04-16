@@ -1,6 +1,6 @@
 <?php
 
-namespace Pearl\RequestValidate;
+namespace Ghostff\FormRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidatesWhenResolvedTrait;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-abstract class FormRequest extends Request implements ValidatesWhenResolved
+abstract class AbstractFromRequest extends Request implements ValidatesWhenResolved
 {
     use ValidatesWhenResolvedTrait;
 

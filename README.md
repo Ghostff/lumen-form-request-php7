@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Ghostff\FormRequest\AbstractFormRequest;
+use Ghostff\FormRequest\AbstractFromRequest;
 
 class Login extends AbstractFormRequest
 {
