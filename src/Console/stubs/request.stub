@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DummyNamespace;
 
-use Ghostff\FormRequest\AbstractFormRequest;
+use Ghostff\FormRequest\RequestAbstract;
 
 /**
  * @method array validated()
  */
-class DummyClass extends AbstractFormRequest
+class DummyClass extends RequestAbstract
 {
     /**
      * Determine if the user is authorized to make this request.

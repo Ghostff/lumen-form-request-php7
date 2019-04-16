@@ -23,11 +23,11 @@ class RequestServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->resolving(AbstractFormRequest::class, function (Request $request, Application $app) {
+        $this->app->resolving(RequestAbstract::class, function (Request $request, Application $app) {
             $this->initializeRequest($request, $app['request']);
         });
 
-        $this->app->afterResolving(AbstractFormRequest::class, function (AbstractFormRequest $resolved) {
+        $this->app->afterResolving(RequestAbstract::class, function (RequestAbstract $resolved) {
             $resolved->validateResolved();
         });
 
@@ -36,11 +36,11 @@ class RequestServiceProvider extends ServiceProvider
     /**
      * Initialize the form request with data from the given request.
      *
-     * @param  \Pearl\RequestValidate\AbstractFormRequest  $form
+     * @param  \Pearl\RequestValidate\RequestAbstract  $form
      * @param  \Illuminate\Http\Request  $current
      * @return void
      */
-    protected function initializeRequest(AbstractFormRequest $form, Request $current)
+    protected function initializeRequest(RequestAbstract $form, Request $current)
     {
         $files = $current->files->all();
 

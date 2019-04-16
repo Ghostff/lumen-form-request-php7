@@ -1,10 +1,10 @@
 **This is a PHP 7+ version from an initial fork of https://github.com/pearlkrishn/lumen-request-validate**
 ----
-Lumen doesn't have form request validator seperatly. This package helps developers to segregate the validation layer from the controller to a separate dedicated class.
+Lumen doesnt't have form request validator seperatly. This package helps developers to segregate the validation layer from the controller to a separate dedicated class.
 
 ## Installation
 
-   `composer require ghostff/lumen-formrequest`
+   `composer require ghostff/lumen-form-request-php7`
 
 - Add the service provider in bootstrap/app.php
 
@@ -26,9 +26,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Ghostff\FormRequest\AbstractFormRequest;
+use Ghostff\FormRequest\RequestAbstract;
 
-class Login extends AbstractFormRequest
+class Login extends RequestAbstract
 {
     /**
      * Determine if the user is authorized to make this request.
